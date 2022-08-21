@@ -10,13 +10,15 @@ def lambda_handler(event, context):
 
     result = client.customers.create_customer(
         body = {
-            "idempotency_key": "59973bb6-75ae-497a-a006-b2490example",
-            "given_name": "Ya",
-            "family_name": "Mi",
-            "company_name": "ACME Inc.",
-            "nickname": "Junior",
-            "email_address": "a@acme.com",
-            "phone_number": "+1 (206) 222-3456"
+      "family_name": event['family_name'],
+      "given_name": event['given_name'],
+      "email_address": event['email_address'],
+      "address": {
+        "locality": event['locality'],
+        "administrative_district_level_1": event['administrative_district_level_1'],
+        "postal_code": event['postal_code'],
+      },
+      "phone_number": event['phone_number'],
         }
     )
 
@@ -24,14 +26,3 @@ def lambda_handler(event, context):
         print(result.body)
     elif result.is_error():
         print(result.errors)
-
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps(
-            {
-                "message": "hello world",
-                # "location": ip.text.replace("\n", "")
-            }
-        ),
-    }
