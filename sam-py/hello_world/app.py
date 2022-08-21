@@ -1,37 +1,30 @@
 import json
-
-# import requests
-
+import os
+from square.client import Client
+import requests
 
 def lambda_handler(event, context):
-    """Sample pure Lambda function
+    client = Client(
+    access_token=os.environ['SQUARE_ACCESS_TOKEN'],
+    environment='sandbox')
 
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
+    result = client.customers.create_customer(
+        body = {
+            "idempotency_key": "59973bb6-75ae-497a-a006-b2490example",
+            "given_name": "Ya",
+            "family_name": "Mi",
+            "company_name": "ACME Inc.",
+            "nickname": "Junior",
+            "email_address": "a@acme.com",
+            "phone_number": "+1 (206) 222-3456"
+        }
+    )
 
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
+    if result.is_success():
+        print(result.body)
+    elif result.is_error():
+        print(result.errors)
 
-    context: object, required
-        Lambda Context runtime methods and attributes
-
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
-
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
-
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
-    """
-
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
-
-    #     raise e
 
     return {
         "statusCode": 200,
