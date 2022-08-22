@@ -26,3 +26,13 @@ def lambda_handler(event, context):
         print(result.body)
     elif result.is_error():
         print(result.errors)
+        
+    { 
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": '*',
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+      },
+      body: JSON.generate(list_project(table))
+    }
