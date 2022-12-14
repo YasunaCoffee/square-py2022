@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "new-square-register"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1k6jegprjnmi4"
+s3_prefix = "new-square-register"
+region = "ap-northeast-1"
+capabilities = "CAPABILITY_IAM"
+image_repositories = ["HelloWorldFunction=186344966105.dkr.ecr.ap-northeast-1.amazonaws.com/newsquareregister11702242/helloworldfunction19d43fc4repo"]
