@@ -30,7 +30,7 @@ def lambda_handler(event, context):
         "postal_code": event['postal_code'],
       },
       "phone_number": event['phone_number'],
-      "birthday": event['birthday']
+      "birthday": event['birthday'],
         }
     )
 
