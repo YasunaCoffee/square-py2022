@@ -23,12 +23,14 @@ def lambda_handler(event, context):
         body = {
       "family_name": event['family_name'],
       "given_name": event['given_name'],
+      "nickname": event['nickname'],
       "address": {
         "locality": event['locality'],
         "administrative_district_level_1": event['administrative_district_level_1'],
         "postal_code": event['postal_code'],
       },
       "phone_number": event['phone_number'],
+      "birthday": event['birthday']
         }
     )
 
